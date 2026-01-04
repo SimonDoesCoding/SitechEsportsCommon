@@ -1,0 +1,12 @@
+C:\dev\SitechEsportsCommon\SitechEsportsCommon\SitechEsportsCommon.OTEL\bin\Debug\net9.0\SitechEsportsCommon.OTEL.deps.json
+C:\dev\SitechEsportsCommon\SitechEsportsCommon\SitechEsportsCommon.OTEL\bin\Debug\net9.0\SitechEsportsCommon.OTEL.dll
+C:\dev\SitechEsportsCommon\SitechEsportsCommon\SitechEsportsCommon.OTEL\bin\Debug\net9.0\SitechEsportsCommon.OTEL.pdb
+C:\dev\SitechEsportsCommon\SitechEsportsCommon\SitechEsportsCommon.OTEL\obj\Debug\net9.0\SitechEsportsCommon.OTEL.csproj.AssemblyReference.cache
+C:\dev\SitechEsportsCommon\SitechEsportsCommon\SitechEsportsCommon.OTEL\obj\Debug\net9.0\SitechEsportsCommon.OTEL.GeneratedMSBuildEditorConfig.editorconfig
+C:\dev\SitechEsportsCommon\SitechEsportsCommon\SitechEsportsCommon.OTEL\obj\Debug\net9.0\SitechEsportsCommon.OTEL.AssemblyInfoInputs.cache
+C:\dev\SitechEsportsCommon\SitechEsportsCommon\SitechEsportsCommon.OTEL\obj\Debug\net9.0\SitechEsportsCommon.OTEL.AssemblyInfo.cs
+C:\dev\SitechEsportsCommon\SitechEsportsCommon\SitechEsportsCommon.OTEL\obj\Debug\net9.0\SitechEsportsCommon.OTEL.csproj.CoreCompileInputs.cache
+C:\dev\SitechEsportsCommon\SitechEsportsCommon\SitechEsportsCommon.OTEL\obj\Debug\net9.0\SitechEsportsCommon.OTEL.dll
+C:\dev\SitechEsportsCommon\SitechEsportsCommon\SitechEsportsCommon.OTEL\obj\Debug\net9.0\refint\SitechEsportsCommon.OTEL.dll
+C:\dev\SitechEsportsCommon\SitechEsportsCommon\SitechEsportsCommon.OTEL\obj\Debug\net9.0\SitechEsportsCommon.OTEL.pdb
+C:\dev\SitechEsportsCommon\SitechEsportsCommon\SitechEsportsCommon.OTEL\obj\Debug\net9.0\ref\SitechEsportsCommon.OTEL.dll

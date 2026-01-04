@@ -1,0 +1,82 @@
+version: 2.1
+
+jobs:
+  build-pack-publish:
+    docker:
+      - image: mcr.microsoft.com/dotnet/sdk:9.0
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+
+      # NuGet cache (no checksum)
+      - restore_cache:
+          keys:
+            - nuget-v1-
+
+      - run:
+          name: Add GitHub Packages NuGet source
+          command: |
+            dotnet nuget add source \
+              https://nuget.pkg.github.com/simondoescoding/index.json \
+              --name github \
+              --username simondoescoding \
+              --password $NUGET_AUTH_TOKEN \
+              --store-password-in-clear-text
+
+      - run:
+          name: Restore
+          command: dotnet restore . --verbosity minimal
+
+      - save_cache:
+          paths:
+            - ~/.nuget/packages
+          key: nuget-v1-
+
+      - run:
+          name: Build
+          command: dotnet build . --configuration Release --no-restore
+
+      - run:
+          name: Set package version
+          command: |
+            BASE_VERSION=1.0.0
+
+            if [ "$CIRCLE_BRANCH" = "main" ]; then
+              PACKAGE_VERSION=$BASE_VERSION
+            else
+              PACKAGE_VERSION="$BASE_VERSION-dev.$CIRCLE_BUILD_NUM"
+            fi
+
+            echo "export PACKAGE_VERSION=$PACKAGE_VERSION" >> $BASH_ENV
+
+      - run:
+          name: Pack
+          command: >
+            dotnet pack .
+            --configuration Release
+            --no-build
+            --output ./artifacts
+            -p:PackageVersion=$PACKAGE_VERSION
+
+      - run:
+          name: Push NuGet package
+          command: |
+            if [ -z "$CIRCLE_PULL_REQUEST" ]; then
+              dotnet nuget push ./artifacts/*.nupkg \
+                --source https://nuget.pkg.github.com/simondoescoding/index.json \
+                --api-key $NUGET_AUTH_TOKEN \
+                --skip-duplicate
+            else
+              echo "Skipping NuGet publish for pull request"
+            fi
+
+workflows:
+  build-and-publish:
+    jobs:
+      - build-pack-publish:
+          filters:
+            branches:
+              only:
+                - main
+                - development
