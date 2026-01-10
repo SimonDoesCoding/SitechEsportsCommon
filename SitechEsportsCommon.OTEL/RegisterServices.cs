@@ -20,6 +20,7 @@ public static class RegisterServices
 
         services
             .AddOpenTelemetry()
+            .UseOtlpExporter()
             .ConfigureResource(resource => resource
                 .AddService("sitech-esports"))
             .WithTracing(tracerProviderBuilder => tracerProviderBuilder
