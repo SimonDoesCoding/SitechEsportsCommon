@@ -15,9 +15,8 @@ public static class RegisterServices
     public const string CorrelationRequestHeaderId = "X-Correlation-Id";
     public const string CorrelationTagId = "CorrelationId";
 
-    public static IServiceCollection RegisterOtel(this IServiceCollection services, IConfiguration config)
+    public static IServiceCollection RegisterOtel(this IServiceCollection services)
     {
-        var otelConfig = config.GetRequiredSection("OtelConfig");
 
         services
             .AddOpenTelemetry()
@@ -27,23 +26,8 @@ public static class RegisterServices
                 .AddSource("sitech-esports")
                 .AddProcessor(new CollaborationIdProcessor())
                 .SetSampler(new AlwaysOnSampler())
-                .AddOtlpExporter(options =>
-                {
-                    options.Endpoint = new Uri(otelConfig.GetValue<string>("Endpoint") ?? 
-                        throw new MissingFieldException("OTEL Endpoint is missing from the config"));
-                    options.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.HttpProtobuf;
-                    options.Headers = otelConfig.GetValue<string>("ApiKey") ?? 
-                        throw new MissingFieldException("OTEL ApiKey is missing from the config");
-                })
              )
             .WithTracing(tracerProviderBuilder => tracerProviderBuilder
-                .AddOtlpExporter(options =>
-                {
-                    options.Endpoint = new Uri(otelConfig.GetValue<string>("Endpoint") ??
-                        throw new MissingFieldException("OTEL Endpoint is missing from the config"));
-                    options.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.HttpProtobuf;
-                    options.Headers = "api-key=3ab70284a36a834dd5d1602e955d3b87FFFFNRAL";
-                })
                 .AddAspNetCoreInstrumentation((options) =>
                 {
                     options.RecordException = true;
